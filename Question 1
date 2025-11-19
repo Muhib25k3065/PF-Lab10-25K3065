@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	char password[50];
+	char specials[] = "!@#$%^&*()-_=+[]{};:'\",.<>/?\\|";
+	
+	while(1)
+	{
+		printf("Enter password: ");
+		scanf("%s", password);
+		
+		int i, j, length = strlen(password);
+		int specialsLength = strlen(specials);
+		int hasUpper = 0;
+		int hasNumber = 0;
+		int hasSpecial = 0;
+		
+		if(length < 8)
+		{
+			printf("Password must be 8 or more characters long, try again.\n");
+			continue;
+		}
+		
+		for(i = 0; i < length; i++)
+		{
+			if(password[i] >= 'A' && password[i] <= 'Z')
+			{
+				hasUpper = 1;
+			}
+		}
+		
+		for(i = 0; i < length; i++)
+		{
+			if(password[i] >= '0' && password[i] <= '9')
+			{
+				hasNumber = 1;
+			}
+		}
+		
+		for(i = 0; i < length; i++)
+		{
+			for(j = 0; j < specialsLength; j++)
+			{
+				if(password[i] == specials[j])
+				{
+					hasSpecial = 1;
+				}
+			}	
+		}
+		
+		if(hasUpper == 0)
+		{
+			printf("Password must contain at least one uppercase letter, try again.\n");
+			continue;
+		}
+		
+		if(hasNumber == 0)
+		{
+			printf("Password must contain at least one number, try again.\n");
+			continue;
+		}
+		
+		if(hasSpecial == 0)
+		{
+			printf("Password must contain at least one special character, try again.\n");
+			continue;
+		}
+		
+		break;
+	}
+	
+	printf("\nPassword has been set!");
+	
+	return 0;
+}
